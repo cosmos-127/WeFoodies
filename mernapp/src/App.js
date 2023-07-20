@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 import "./App.css";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./screens/Home";
 import Error from "./screens/Error";
 import Login from "./screens/Login";
