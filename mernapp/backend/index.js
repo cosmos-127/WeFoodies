@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
+const mongoDB = require("./db");
 const port = 5000;
-const mongoDB = require("./db"); // Adjust the path to your db.js file
 
 // ... Your other route and middleware setup ...
+app.use(express.json());
+app.use("/api", require("./Routes/createUsers"));
 
 
 // Connect to MongoDB before starting the server

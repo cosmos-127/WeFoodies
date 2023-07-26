@@ -5,7 +5,10 @@ const mongoURI =
 const mongoDB = async () => {
   try {
     // connecting to the MongoDB database using Mongoose.
-    await mongoose.connect(mongoURI, { useNewUrlParser: true });
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("MongoDB connected");
 
     //  First it accesses the underlying native MongoDB collection object using mongoose.connection.db.collection("food_type"). Then, it uses the find({}) method to retrieve all documents in the collection and toArray() to convert the result into an array of objects.
@@ -14,7 +17,7 @@ const mongoDB = async () => {
       .find({})
       .toArray();
     console.log("All data from WeFoodies collection:");
-    console.log(fetchedData);
+    // console.log(fetchedData);
   } catch (error) {
     console.error("Error connecting to MongoDB:", error.message);
     throw error;
