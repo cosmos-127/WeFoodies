@@ -1,19 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Raleway&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Raleway&display=swap");
 body {
   margin: 0;
   background-color: #222831 !important;
   color: white !important;
-  font-family: Raleway, sans-serif,Poppins !important;
+  font-family: Raleway, sans-serif, Poppins !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-/* .card{
-  background-color: #222831 !important;
-  color: #EEEEEE !important;
-} */
+
 .card {
   background-color: #2a323f !important;
   color: #1fdce6 !important;
+}
+.card:hover {
+  background-color: #181d24 !important;
+  color: #1fdce6 !important;
+  box-shadow: hsl(183, 80%, 51%, 30%) 0px 15px 60px 0px;
 }
 
 code {

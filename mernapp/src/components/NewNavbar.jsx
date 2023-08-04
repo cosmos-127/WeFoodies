@@ -15,6 +15,7 @@ function NewNavbar() {
           <Nav className="me-auto">
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/createuser">Sign Up</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
