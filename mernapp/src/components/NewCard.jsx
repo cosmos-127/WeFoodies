@@ -1,15 +1,15 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 
-const NewCard = () => {
+const NewCard = (props) => {
   return (
-    <div>
-      <Card style={{ width: "18rem", maxHeight: "360px" }} >
-        <Card.Img variant="top" src="https://media.istockphoto.com/id/693946394/photo/paneer-tikka-kabab-tandoori-indian-cheese-skewers-or-barbecue-paneer-selective-focus.jpg?s=1024x1024&w=is&k=20&c=FyZaA2fwPVwQ1g65ykXByBrsiZQjSFboB-tzXSDO-Cs=" />
+    <div className="mb-3">
+      <Card style={{ width: "16rem", maxHeight: "400px" }}>
+        <Card.Img variant="top" src={props.imgSrc} />
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title
+          <Card.Title>{props.foodName}</Card.Title>
+          <Card.Text style={{ fontSize: "13px", color: "#E1E1D9" }}>
+            {props.description}
           </Card.Text>
           <div className="container w-100">
             <select className="m-2 h-100 rounded bg-dark text-bg-dark">

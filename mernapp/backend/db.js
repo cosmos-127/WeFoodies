@@ -12,14 +12,26 @@ const mongoDB = async () => {
     console.log("MongoDB connected");
 
     //  First it accesses the underlying native MongoDB collection object using mongoose.connection.db.collection("food_type"). Then, it uses the find({}) method to retrieve all documents in the collection and toArray() to convert the result into an array of objects.
-    const fetchedData = await mongoose.connection.db
+
+    // fetching food_type collection
+    const fetchedData_type = await mongoose.connection.db
       .collection("food_type")
       .find({})
       .toArray();
-    console.log("All data from WeFoodies collection:");
-    // console.log(fetchedData);
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error.message);
+    console.log("food_type data is fetched");
+    global.food_type = fetchedData_type;
+
+    // fetching food_category collection
+    const fetchedData_category = await mongoose.connection.db
+      .collection("food_category")
+      .find({})
+      .toArray();
+    console.log("food_category data is fetched");
+    global.food_category = fetchedData_category;
+  }
+
+  catch (error) {
+    console.error("Error connecting to MongoDB:", error);
     throw error;
   }
 };

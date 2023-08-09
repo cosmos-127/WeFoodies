@@ -1,30 +1,32 @@
 const express = require("express");
 const { body, validationResult } = require("express-validator");
 const router = express.Router();
-const User = require("../models/User");
+const User = require("../models/User"); // Import the User model
 const jwt = require("jsonwebtoken");
-// Sign the JWT with a secret key
 const secretKey = "your-secret-key"; // Replace with your actual secret key
 
+// Route to handle user login
 router.post(
   "/loginuser",
   [
-    // Validate email and password
+    // Validate email and password using express-validator
     body("email").isEmail().normalizeEmail(),
     body("password").isLength({ min: 6 }),
   ],
   async (req, res) => {
     try {
       // Check for validation errors
-
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
       }
 
       const { email, password } = req.body;
+
+      // Find the user data based on the provided email
       const userData = await User.findOne({ email });
 
+      // If no user found, return an authentication error
       if (!userData) {
         return res.status(401).json({ message: "Invalid credentials" });
       }
@@ -34,6 +36,7 @@ router.post(
       if (!isPasswordValid) {
         return res.status(401).json({ message: "Invalid credentials" });
       }
+
       // Create a payload for the JWT
       const payload = {
         user: {
@@ -41,16 +44,18 @@ router.post(
         },
       };
 
-      const authToken = jwt.sign(payload, secretKey, { expiresIn: "1h" }); // Token expires in 1 hour
+      // Generate a JWT token with a 1-hour expiration
+      const authToken = jwt.sign(payload, secretKey, { expiresIn: "1h" });
 
+      // Respond with success, user data, and the generated token
       res.json({
         success: true,
-        userData: { name: userData.name, email: userData.email },
+        user: { name: userData.name, email: userData.email },
         authToken,
       });
     } catch (error) {
-      console.log(error);
-      res.json({ success: false });
+      console.error(error);
+      res.status(500).json({ success: false, error: "An error occurred" });
     }
   }
 );

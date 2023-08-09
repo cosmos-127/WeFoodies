@@ -5,15 +5,21 @@ import Footer from "../components/Footer";
 import { useState } from "react";
 
 const Login = () => {
+  // State to hold form data (email and password)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  // Get the navigation function for routing
   let navigate = useNavigate();
+
+  // Function to update form data state on input change
   const onChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  // Function to handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -27,20 +33,26 @@ const Login = () => {
       });
 
       const json = await response.json();
-      console.log(json);
 
       if (!json.success) {
+        // Display an error message for invalid credentials
         alert("Invalid credentials");
       } else {
+        // Store the authentication token in local storage and navigate to the root route
+        localStorage.setItem("authToken", json.authToken);
         navigate("/");
       }
 
+      // Clear form data state after submission
       setFormData({
         email: "",
         password: "",
       });
     } catch (error) {
+      // Handle and log errors that occur during fetch request
       console.error("Error submitting form:", error);
+      // You can provide user-friendly error messages here
+      alert("An error occurred while processing your request.");
     }
   };
 

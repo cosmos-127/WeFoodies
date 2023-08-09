@@ -30,7 +30,8 @@ app.use(express.json());
 app.use("/api", require("./Routes/createUsers"));
 // This line mounts a route handler for creating users under the "/api" route.
 app.use("/api", require("./Routes/loginUsers"));
-// This line mounts a route handler for user login under the "/api" route. 
+app.use("/api", require("./Routes/displayData"));
+
 
 // Connect to MongoDB before starting the server
 mongoDB()
